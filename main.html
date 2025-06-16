@@ -10,7 +10,7 @@
   <div class="wrapper">
     <video class="flex" width="765" height="430" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
     <div class="controls">
-<button class="player__button toggle" title="Toggle Play">►</button>
+<button class="player__button" title="Toggle Play">►</button>
 <button data-skip="-10">« 10s</button>
 <button data-skip="25">25s »</button>
 
@@ -24,55 +24,7 @@
 
 <script  src="./script.js">
   //Your code goes here
-const video = document.querySelector('.flex');
-const toggle = document.querySelector('.toggle');
-const skipButtons = document.querySelectorAll('[data-skip]');
-const slider = document.querySelectorAll('.player__slider');
-const progress = document.querySelector('.progress');
-const progressFilled = document.querySelector('.progress__filled');
 
-function togglePlay(){
-	if(video.paused){
-		video.play();
-	}else{
-		video.pause();
-	}
-}
-function updateButton(){
-	toggle.textContent = video.paused ? '►' : '❚ ❚';
-}
-
-function skip(){
-	video.currentTime += parseFloat(this.dataset.skip);
-}
-
-function handleSliderUpdate(){
-	video[this.name] = this.value;
-}
-
-function handleProgress(){
-	const percent = (video.currentTime / video.duration) * 100;
-	progressFilled.style.width = `{percent}%`;
-}
-
-fucntion scrub(e){
-	const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-	video.currentTime = scrubTime;
-}
-video.addEventListener('click', togglePlay);
-video.addEventListener('play', updateButton);
-video.addEventListener('pause', updateButton);
-video.addEventListener('timeUpdate', handleProgress);
-
-toggle.addEventListener('click', togglePlay);
-skipButtons.forEach(button => button.addEventListener('click', skip));
-slider.forEach(slider => slider.addEventListener('input', handleSliderUpdate));
-
-let mousedown = false;
-progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', e => mousedown && scrub(e));
-progress.addEventListener('mousedown', () => mousedown = true);
-progress.addEventListener('mouseup', () => mousedown = false);
 </script>
 </body>
 </html>
